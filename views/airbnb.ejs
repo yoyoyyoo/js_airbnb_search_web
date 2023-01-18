@@ -1,0 +1,50 @@
+<!-- /*
+COMP206 Assignment2 due by Dec.11, 2022
+Author: Yanan Liu
+This is airbnb.ejs. It is a template that used to show a specific place's detail when user choose that place in the listings page 
+*/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if (listing != null) { %>
+    <title><%= listing.name %></title>
+    <%}else {%>
+        <title>No Matched Result</title>
+        <%}%>   
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      </head>
+</head>
+<body class="ms-5 mt-2">
+    <form action="/">
+        <button type = "submit"> Home </button>
+    <div class="border p-5 mt-5 bg-light col-6">
+
+    <% if (listing != null) { %>
+    <h2><%= listing[0].name %>, hosted by <a href="mailto:<%=listing[0].email%>"> <%=listing[0].first_name%> <%=listing[0].last_name%> </a></h2>
+    <p><%= listing[0].cityName %>, <%= listing[0].stateName %></p>
+    <p><%= listing[0].number_rooms %> Room(s), <%= listing[0].max_guest %> Guest(s) Max,  <%= listing[0].number_bathroom %> baths @ $<%= listing[0].price_by_night %> CAD /night</p>
+    <hr>
+    <p><%= listing[0].name %></p>
+    <p><%- listing[0].description %></p>
+    <hr>
+   <h5>Amenities Included</h5>
+    <p> 
+        <% let i=0 %>
+         <% for (i; i < listing.length-1; i++) {%>
+        <%=listing[i].amenitiesName %>, <%}%> 
+        <%=listing[i].amenitiesName %>
+    </p>
+        <%}
+    else {%>
+       
+        <h2> No listing were found that match your criteria. </h2> 
+        <%}%>
+    </div>
+</form>
+</body>
+</html>

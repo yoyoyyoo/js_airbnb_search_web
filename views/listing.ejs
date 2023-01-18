@@ -1,0 +1,50 @@
+<!-- /*
+COMP206 Assignment2 due by Dec.11, 2022
+Author: Yanan Liu
+This is listing.ejs. It is a template that used to show only places' detail information after users set the criterias.
+*/ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if (listing != null) { %>
+    <title><%= listing.name %></title>
+    <%}else {%>
+        <title>No Matched Result</title>
+        <%}%>   
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      </head>
+</head>
+<body class="ms-5 mt-2">
+    <form action="/">
+        <button type = "submit"> Home </button>
+    <div class="border p-5 mt-5 bg-light col-6">
+     <!-- check if the result is empty or not; if not, list one result; otherwise, show "no listing" -->
+    <% if (listing != null) { %>
+    <h2><%= listing.name %>, hosted by <a href="mailto:<%=listing.email%>"> <%=listing.first_name%> <%=listing.last_name%> </a></h2>
+    <p><%= listing.cityName %>, <%= listing.stateName %></p>
+    <p><%= listing.number_rooms %> Room(s), <%= listing.max_guest %> Guest(s) Max,  <%= listing.number_bathrooms %> baths @ $<%= listing.price_by_night %> CAD /night</p>
+    <hr>
+    <p><%= listing.name %></p>
+    <p><%- listing.description %></p>
+    <hr>
+   <h5>Amenities Included</h5>
+    <p> <% let i=0; %>
+         <% for (i; i < amenitiesResult.length-1; i++) {%>
+        <%=amenitiesResult[i].name %>, <%}%> 
+        <%=amenitiesResult[i].name %>
+    </p>
+        <%}
+    else {%>
+       
+        <h3> No listing were found that match your criteria. </h3> 
+        <%}%>
+    </div>
+</form>
+</body>
+</html>
